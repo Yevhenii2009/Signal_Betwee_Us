@@ -2,6 +2,8 @@
 #include "SB_CableActor.h"
 #include "SB_GeneratorActor.h"
 #include "SB_SignalConsoleActor.h"
+#include "SB_AntennaActor.h"
+#include "SB_AntennaPartActor.h"
 
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -38,6 +40,8 @@ AFP_FirstPersonCharacter::AFP_FirstPersonCharacter()
 	CurrentCable = nullptr;
 	CurrentGenerator = nullptr;
 	CurrentConsole = nullptr;
+	CurrentAntenna = nullptr;
+	CurrentAntennaPart = nullptr;
 }
 
 /*
@@ -105,6 +109,8 @@ Handles interaction with nearby objects:
 - Cable
 - Generator
 - Signal Console
+- Antenna Parts
+- Antenna
 */
 void AFP_FirstPersonCharacter::Interact()
 {
@@ -126,6 +132,20 @@ void AFP_FirstPersonCharacter::Interact()
 	if (CurrentConsole)
 	{
 		CurrentConsole->Interact();
+		return;
+	}
+
+	// Pick up antenna part
+	if (CurrentAntennaPart)
+	{
+		CurrentAntennaPart->Interact();
+		return;
+	}
+
+	// Install antenna part / open repair
+	if (CurrentAntenna)
+	{
+		CurrentAntenna->Interact();
 		return;
 	}
 }
@@ -153,30 +173,46 @@ void AFP_FirstPersonCharacter::CheckForInteractable()
 	CurrentCable = nullptr;
 	CurrentGenerator = nullptr;
 	CurrentConsole = nullptr;
+	CurrentAntenna = nullptr;
+	CurrentAntennaPart = nullptr;
 
 	// Perform LineTrace
 	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params);
 
 	if (bHit)
 	{
-		// Check Cable
+		// Cable
 		if (ASB_CableActor* Cable = Cast<ASB_CableActor>(Hit.GetActor()))
 		{
 			CurrentCable = Cable;
 			return;
 		}
 
-		// Check Generator
+		// Generator
 		if (ASB_GeneratorActor* Generator = Cast<ASB_GeneratorActor>(Hit.GetActor()))
 		{
 			CurrentGenerator = Generator;
 			return;
 		}
 
-		// Check Signal Console
+		// Signal Console
 		if (ASB_SignalConsoleActor* Console = Cast<ASB_SignalConsoleActor>(Hit.GetActor()))
 		{
 			CurrentConsole = Console;
+			return;
+		}
+
+		// Antenna Part
+		if (ASB_AntennaPartActor* Part = Cast<ASB_AntennaPartActor>(Hit.GetActor()))
+		{
+			CurrentAntennaPart = Part;
+			return;
+		}
+
+		// Antenna
+		if (ASB_AntennaActor* Antenna = Cast<ASB_AntennaActor>(Hit.GetActor()))
+		{
+			CurrentAntenna = Antenna;
 			return;
 		}
 	}
