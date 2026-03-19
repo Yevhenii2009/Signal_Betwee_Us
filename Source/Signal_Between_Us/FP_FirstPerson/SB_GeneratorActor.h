@@ -17,7 +17,6 @@ public:
 
 	void StartMiniGame();
 	void OnMiniGameCompleted(bool bSuccess);
-
 	bool CanUseGenerator() const;
 
 protected:

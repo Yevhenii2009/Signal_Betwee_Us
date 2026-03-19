@@ -12,7 +12,6 @@ class SIGNAL_BETWEEN_US_API ASB_CableActor : public AActor
 public:
 	ASB_CableActor();
 	void Interact();
-
 protected:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Mesh;

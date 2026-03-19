@@ -13,7 +13,6 @@ ASB_SignalConsoleActor::ASB_SignalConsoleActor()
 	RootComponent = Mesh;
 
 	Mesh->SetCollisionProfileName("BlockAll");
-
 	ActiveWidget = nullptr;
 }
 

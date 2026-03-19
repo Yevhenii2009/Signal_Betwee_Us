@@ -11,7 +11,6 @@ ASB_AntennaPartActor::ASB_AntennaPartActor()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
 }
-
 void ASB_AntennaPartActor::Interact()
 {
 	AFP_FirstPersonCharacter* Player =

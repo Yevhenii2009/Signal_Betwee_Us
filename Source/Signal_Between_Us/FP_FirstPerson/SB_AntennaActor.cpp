@@ -23,7 +23,6 @@ ASB_AntennaActor::ASB_AntennaActor()
 	RepairPart3 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RepairPart3"));
 	RepairPart3->SetupAttachment(BaseMesh);
 }
-
 void ASB_AntennaActor::BeginPlay()
 {
 	Super::BeginPlay();

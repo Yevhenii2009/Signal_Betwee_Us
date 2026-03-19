@@ -14,7 +14,6 @@ class SIGNAL_BETWEEN_US_API ASB_MonitorActor : public AActor
 
 public:
 	ASB_MonitorActor();
-
 protected:
 	virtual void BeginPlay() override;
 

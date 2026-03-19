@@ -14,7 +14,6 @@ void ASB_GameState::SetPowerOn(bool bOn)
 {
 	bPowerOn = bOn;
 }
-
 bool ASB_GameState::IsPowerOn() const
 {
 	return bPowerOn;

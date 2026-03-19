@@ -12,7 +12,6 @@ class SIGNAL_BETWEEN_US_API USB_AntennaRepairWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-
 	virtual void NativeConstruct() override;
 
 	UPROPERTY(meta = (BindWidget))

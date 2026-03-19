@@ -10,7 +10,6 @@ ASB_MonitorActor::ASB_MonitorActor()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
-
 	ScreenText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("ScreenText"));
 	ScreenText->SetupAttachment(RootComponent);
 	ScreenText->SetRelativeLocation(FVector(0.f, 0.f, 100.f));

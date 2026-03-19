@@ -15,7 +15,6 @@ public:
 
 	void SetPowerOn(bool bOn);
 	bool IsPowerOn() const;
-
 	void SetRemainingPowerTime(float Time);
 	float GetRemainingPowerTime() const;
 

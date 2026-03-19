@@ -12,7 +12,6 @@ ASB_GameMode::ASB_GameMode()
 
 	GameStateClass = ASB_GameState::StaticClass();
 }
-
 void ASB_GameMode::SetCableCollected()
 {
 	ASB_GameState* GS = GetGameState<ASB_GameState>();

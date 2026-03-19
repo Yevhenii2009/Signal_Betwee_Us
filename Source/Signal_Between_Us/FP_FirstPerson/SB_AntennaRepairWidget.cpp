@@ -12,7 +12,6 @@ void USB_AntennaRepairWidget::NativeConstruct()
 		RepairButton->OnClicked.AddDynamic(this, &USB_AntennaRepairWidget::OnRepairClicked);
 	}
 }
-
 void USB_AntennaRepairWidget::OnRepairClicked()
 {
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);

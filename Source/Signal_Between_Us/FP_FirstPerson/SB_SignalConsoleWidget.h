@@ -14,7 +14,6 @@ class SIGNAL_BETWEEN_US_API USB_SignalConsoleWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-
 	UFUNCTION(BlueprintCallable)
 	void SetGeneratorPercent(float NewPercent);
 

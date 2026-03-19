@@ -8,7 +8,6 @@ class UImage;
 class UButton;
 class UTextBlock;
 class ASB_GeneratorActor;
-
 UCLASS()
 class SIGNAL_BETWEEN_US_API USB_GeneratorMiniGameWidget : public UUserWidget
 {

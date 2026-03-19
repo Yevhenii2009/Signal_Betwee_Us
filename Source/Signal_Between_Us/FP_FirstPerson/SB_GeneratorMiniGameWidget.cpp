@@ -10,7 +10,6 @@ void USB_GeneratorMiniGameWidget::NativeConstruct()
 	Super::NativeConstruct();
 
 	if (!BackgroundImage) return;
-
 	FVector2D BGSize = BackgroundImage->GetCachedGeometry().GetLocalSize();
 
 	if (CursorImage)

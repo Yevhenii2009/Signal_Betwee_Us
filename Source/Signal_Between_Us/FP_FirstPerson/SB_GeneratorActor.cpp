@@ -75,7 +75,6 @@ void ASB_GeneratorActor::OnMiniGameCompleted(bool bSuccess)
 
 	if (!bSuccess)
 		return;
-
 	bMiniGameCompleted = true;
 
 	ASB_GameMode* GM = Cast<ASB_GameMode>(UGameplayStatics::GetGameMode(GetWorld()));

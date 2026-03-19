@@ -9,7 +9,6 @@ bool USB_SignalConsoleWidget::Initialize()
 
 	if (Button_GeneratorStatus)
 		Button_GeneratorStatus->OnClicked.AddDynamic(this, &USB_SignalConsoleWidget::OnGeneratorStatusClicked);
-
 	if (Button_SignalLevel)
 		Button_SignalLevel->OnClicked.AddDynamic(this, &USB_SignalConsoleWidget::OnSignalLevelClicked);
 

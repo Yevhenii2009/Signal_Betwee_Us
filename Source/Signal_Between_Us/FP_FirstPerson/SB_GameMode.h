@@ -12,7 +12,6 @@ UCLASS()
 class SIGNAL_BETWEEN_US_API ASB_GameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-
 public:
 	ASB_GameMode();
 

@@ -13,7 +13,6 @@ UCLASS()
 class SIGNAL_BETWEEN_US_API ASB_AntennaPartActor : public AActor
 {
 	GENERATED_BODY()
-
 public:
 	ASB_AntennaPartActor();
 

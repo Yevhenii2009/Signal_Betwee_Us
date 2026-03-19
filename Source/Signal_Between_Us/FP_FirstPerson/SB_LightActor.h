@@ -16,7 +16,6 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-
 private:
 	UPROPERTY(VisibleAnywhere)
 	UPointLightComponent* LightComponent;

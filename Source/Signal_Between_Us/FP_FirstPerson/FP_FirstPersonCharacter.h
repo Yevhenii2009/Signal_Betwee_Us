@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
@@ -20,6 +20,7 @@ public:
 	AFP_FirstPersonCharacter();
 
 protected:
+	virtual void BeginPlay() override; // <-- добавлено
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -33,12 +34,10 @@ protected:
 	void CheckForInteractable();
 
 public:
-
 	/* Player can carry only ONE antenna part */
 	bool bCarryingAntennaPart = false;
 
 private:
-
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* FirstPersonCamera;
 

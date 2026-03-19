@@ -11,7 +11,6 @@ UCLASS()
 class SIGNAL_BETWEEN_US_API ASB_SignalConsoleActor : public AActor
 {
 	GENERATED_BODY()
-
 public:
 	ASB_SignalConsoleActor();
 

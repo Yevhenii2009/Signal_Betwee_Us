@@ -6,7 +6,6 @@
 ASB_LightActor::ASB_LightActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
 	LightComponent = CreateDefaultSubobject<UPointLightComponent>(TEXT("PointLight"));
 	RootComponent = LightComponent;
 
