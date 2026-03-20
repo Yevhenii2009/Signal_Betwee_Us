@@ -11,6 +11,7 @@ ASB_AntennaPartActor::ASB_AntennaPartActor()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
 }
+
 void ASB_AntennaPartActor::Interact()
 {
 	AFP_FirstPersonCharacter* Player =
@@ -19,10 +20,16 @@ void ASB_AntennaPartActor::Interact()
 	if (!Player)
 		return;
 
+	// Уже несёт деталь
 	if (Player->bCarryingAntennaPart)
 		return;
 
+	// ❗ Берём только следующую по порядку
+	if (PartIndex != Player->CarriedPartIndex + 1)
+		return;
+
 	Player->bCarryingAntennaPart = true;
-	 
+	Player->CarriedPartIndex = PartIndex;
+
 	Destroy();
 }

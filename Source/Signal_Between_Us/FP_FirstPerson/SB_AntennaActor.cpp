@@ -23,6 +23,7 @@ ASB_AntennaActor::ASB_AntennaActor()
 	RepairPart3 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RepairPart3"));
 	RepairPart3->SetupAttachment(BaseMesh);
 }
+
 void ASB_AntennaActor::BeginPlay()
 {
 	Super::BeginPlay();
@@ -40,9 +41,12 @@ void ASB_AntennaActor::Interact()
 	if (!Player)
 		return;
 
-	if (Player->bCarryingAntennaPart && InstalledParts < 3)
+	// ❗ Проверка правильного порядка установки
+	if (Player->bCarryingAntennaPart &&
+		Player->CarriedPartIndex == InstalledParts + 1)
 	{
-		InstallPart();
+		InstallPart(Player->CarriedPartIndex);
+
 		Player->bCarryingAntennaPart = false;
 		return;
 	}
@@ -53,17 +57,17 @@ void ASB_AntennaActor::Interact()
 	}
 }
 
-void ASB_AntennaActor::InstallPart()
+void ASB_AntennaActor::InstallPart(int PartIndex)
 {
 	InstalledParts++;
 
-	if (InstalledParts == 1)
+	if (PartIndex == 1 && RepairPart1)
 		RepairPart1->SetVisibility(true);
 
-	if (InstalledParts == 2)
+	if (PartIndex == 2 && RepairPart2)
 		RepairPart2->SetVisibility(true);
 
-	if (InstalledParts == 3)
+	if (PartIndex == 3 && RepairPart3)
 	{
 		RepairPart3->SetVisibility(true);
 		bAntennaComplete = true;

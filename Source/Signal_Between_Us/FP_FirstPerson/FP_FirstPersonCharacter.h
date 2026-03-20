@@ -20,7 +20,7 @@ public:
 	AFP_FirstPersonCharacter();
 
 protected:
-	virtual void BeginPlay() override; // <-- добавлено
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -34,8 +34,13 @@ protected:
 	void CheckForInteractable();
 
 public:
-	/* Player can carry only ONE antenna part */
+	/* 🔹 Игрок может нести только ОДНУ деталь */
+	UPROPERTY(BlueprintReadWrite)
 	bool bCarryingAntennaPart = false;
+
+	/* 🔹 Номер переносимой детали (0 = ничего, 1-3 = части антенны) */
+	UPROPERTY(BlueprintReadWrite)
+	int CarriedPartIndex = 0;
 
 private:
 	UPROPERTY(VisibleAnywhere)

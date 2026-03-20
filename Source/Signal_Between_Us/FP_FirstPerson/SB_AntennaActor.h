@@ -6,6 +6,7 @@
 
 class UStaticMeshComponent;
 class USB_AntennaRepairWidget;
+
 UCLASS()
 class SIGNAL_BETWEEN_US_API ASB_AntennaActor : public AActor
 {
@@ -42,7 +43,6 @@ private:
 
 	bool bAntennaComplete = false;
 
-	void InstallPart();
-
+	void InstallPart(int PartIndex);
 	void OpenRepairUI();
 };
