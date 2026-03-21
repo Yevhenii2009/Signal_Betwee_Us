@@ -1,4 +1,7 @@
 ﻿#include "FP_FirstPersonCharacter.h"
+#include "SB_InteractionWidget.h"
+#include "UObject/ConstructorHelpers.h"
+
 #include "SB_CableActor.h"
 #include "SB_GeneratorActor.h"
 #include "SB_SignalConsoleActor.h"
@@ -7,7 +10,8 @@
 
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
+#include "Blueprint/UserWidget.h"
 
 AFP_FirstPersonCharacter::AFP_FirstPersonCharacter()
 {
@@ -31,14 +35,32 @@ AFP_FirstPersonCharacter::AFP_FirstPersonCharacter()
     CurrentConsole = nullptr;
     CurrentAntenna = nullptr;
     CurrentAntennaPart = nullptr;
+
+    // 🔹 Авто-настройка виджета без BP
+    static ConstructorHelpers::FClassFinder<USB_InteractionWidget> WidgetBPClass(
+        TEXT("/Game/FirstPersonCPP/Blueprints/BP_InteractionWidget")
+    );
+
+    if (WidgetBPClass.Succeeded())
+    {
+        InteractionWidgetClass = WidgetBPClass.Class;
+    }
 }
 
 void AFP_FirstPersonCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
-    PrimaryActorTick.SetTickFunctionEnable(true);
-    SetActorTickEnabled(true);
+    if (InteractionWidgetClass)
+    {
+        InteractionWidget = CreateWidget<USB_InteractionWidget>(GetWorld(), InteractionWidgetClass);
+
+        if (InteractionWidget)
+        {
+            InteractionWidget->AddToViewport();
+            InteractionWidget->ShowInteraction(false);
+        }
+    }
 }
 
 void AFP_FirstPersonCharacter::Tick(float DeltaTime)
@@ -133,6 +155,8 @@ void AFP_FirstPersonCharacter::CheckForInteractable()
         Params
     );
 
+    bool bCanInteract = false;
+
     if (bHit && Hit.GetActor())
     {
         AActor* HitActor = Hit.GetActor();
@@ -140,27 +164,32 @@ void AFP_FirstPersonCharacter::CheckForInteractable()
         if (ASB_CableActor* Cable = Cast<ASB_CableActor>(HitActor))
         {
             CurrentCable = Cable;
-            return;
+            bCanInteract = true;
         }
-        if (ASB_GeneratorActor* Generator = Cast<ASB_GeneratorActor>(HitActor))
+        else if (ASB_GeneratorActor* Generator = Cast<ASB_GeneratorActor>(HitActor))
         {
             CurrentGenerator = Generator;
-            return;
+            bCanInteract = true;
         }
-        if (ASB_SignalConsoleActor* Console = Cast<ASB_SignalConsoleActor>(HitActor))
+        else if (ASB_SignalConsoleActor* Console = Cast<ASB_SignalConsoleActor>(HitActor))
         {
             CurrentConsole = Console;
-            return;
+            bCanInteract = true;
         }
-        if (ASB_AntennaPartActor* Part = Cast<ASB_AntennaPartActor>(HitActor))
+        else if (ASB_AntennaPartActor* Part = Cast<ASB_AntennaPartActor>(HitActor))
         {
             CurrentAntennaPart = Part;
-            return;
+            bCanInteract = true;
         }
-        if (ASB_AntennaActor* Antenna = Cast<ASB_AntennaActor>(HitActor))
+        else if (ASB_AntennaActor* Antenna = Cast<ASB_AntennaActor>(HitActor))
         {
             CurrentAntenna = Antenna;
-            return;
+            bCanInteract = true;
         }
+    }
+
+    if (InteractionWidget)
+    {
+        InteractionWidget->ShowInteraction(bCanInteract);
     }
 }
